@@ -61,7 +61,7 @@ module.exports = {
             template: path.resolve(__dirname, 'src/components/admin/admin.html'),
             chunks: ['admin']
         }),
-
+        
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].css'
@@ -95,7 +95,7 @@ module.exports = {
                         name: '[name].[ext]'
                     }
                 }
-            }    
+            }
 
         ]
     }

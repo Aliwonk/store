@@ -1,14 +1,14 @@
 import express from 'express';
-import { Admin } from '../controllers/admin.js';
 import { Auth } from '../controllers/auth.js';
-import {MainPage } from '../controllers/mainPage.js';
+import { MainPage } from '../controllers/mainPage.js';
+import { adminRouter } from './admin.js';
+import { apiRouter } from './api.js';
 
 const router = express.Router();
 
 // Контроллеры
 let mainPage = new MainPage(),
-auth = new Auth(),
-admin = new Admin();
+auth = new Auth();
 
 // Маршруты
 
@@ -28,8 +28,10 @@ router.route('/signIn')
 .post(auth.postSignIn);
 
     // страница админа
-router.route('/admin')
-.get(admin.get);
+router.use('/admin', adminRouter);
+
+// API
+router.use('/api', apiRouter);
 
 
 export { router };

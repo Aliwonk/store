@@ -10,4 +10,27 @@ export class Admin {
 
     };
 
+
+    // Страница отдельного пользователя
+
+    getUser(req, res) {
+        
+        // Получаем id пользователя
+        const id = req.params.id;
+
+        //  Получаем данные пользователя по id из Mysql
+        MysqlDB((err, connect) => {
+            if(err) return res.sendStatus(500);
+
+
+            let sql = `SELECT id, firstName, lastName, patronicName, phone, email, dateRegis FROM users WHERE id=${id}`;
+            connect.query(sql, (error, data) => {
+                if(error) return res.send(error);
+
+                res.send(data);
+            });
+        });
+
+    };
+
 };

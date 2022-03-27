@@ -6,7 +6,7 @@ import '../../assets/sass/Auth.sass';
 import NumberFormat from 'react-number-format';
 
 const lang = localStorage.getItem('lang');
-
+const date = new Date();
 
 render(
     <div>
@@ -33,15 +33,19 @@ function FormSignUp(props) {
             caption = 'Регистрация';
             valueSubmit = 'Зарегистрироваться';
             valueLabels = {
-                name: 'Ваше имя',
-                email: 'Email',
+                firstName: 'Фамилия',
+                lastName: 'Имя',
+                patronicName: 'Отчество',
                 phone: 'Ваш номер',
+                email: 'Email',
                 password: 'Пароль'
             };
             placeholders = {
-                name: 'Введите имя',
-                email: 'example@mail.com',
+                firstName: 'Введите Фамилию',
+                lastName: 'Введите Имя',
+                patronicName: 'Введиет Отчество',
                 phone: 'Введите номер',
+                email: 'example@mail.com',
                 password: 'Введите пароль'            
             };
             break;
@@ -50,15 +54,19 @@ function FormSignUp(props) {
             caption = 'Sign Up';
             valueSubmit = 'Sign Up';
             valueLabels = {
-                name: 'Name',
-                email: 'Email',
+                firstName: 'First Name',
+                lastName: 'Last Name',
+                patronicName: 'Patronic Name',
                 phone: 'Phone',
+                email: 'Email',
                 password: 'Password'
             };
             placeholders = {
-                name: 'Your name',
-                email: 'example@mail.com',
+                firstName: 'Your First Name',
+                lastName: 'Your Last Name',
+                patronicName: 'Your Patric Name',
                 phone: 'Your number',
+                email: 'example@mail.com',
                 password: 'password'            
             };
             break;
@@ -67,15 +75,19 @@ function FormSignUp(props) {
             caption = 'Регистрация';
             valueSubmit = 'Зарегистрироваться';
             valueLabels = {
-                name: 'Ваше имя',
-                email: 'Email',
+                firstName: 'Фамилия',
+                lastName: 'Имя',
+                patronicName: 'Отчество',
                 phone: 'Ваш номер',
+                email: 'Email',
                 password: 'Пароль'
             };
             placeholders = {
-                name: 'Введите имя',
-                email: 'example@mail.com',
+                firstName: 'Введите Фамилию',
+                lastName: 'Введите Имя',
+                patronicName: 'Введиет Отчество',
                 phone: 'Введите номер',
+                email: 'example@mail.com',
                 password: 'Введите пароль'            
             };
             break;
@@ -85,9 +97,11 @@ function FormSignUp(props) {
 
     // Значение форм
     let [form, setForm] = useState({
-        name: '',
-        email: '',
+        firstName: '',
+        lastName: '',
+        patronicName: '',
         phone: '',
+        email: '',
         password: ''
     });
 
@@ -113,6 +127,7 @@ function FormSignUp(props) {
 
 
     // Отправка данных на сервер с помощью Fetch
+    let dateRegis = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
     function sendData() {
 
         fetch('/signUp', {
@@ -121,9 +136,12 @@ function FormSignUp(props) {
                 'Content-Type' : 'application/json'
             },
             body: JSON.stringify({
-                name: form.name,
-                email: form.email,
+                firstName: form.firstName,
+                lastName: form.lastName,
+                patronicName: form.patronicName,
                 phone: form.phone,
+                email: form.email,
+                dateRegis,
                 password: form.password
             })
         }).then(res => res.json())
@@ -140,16 +158,43 @@ function FormSignUp(props) {
         >
             <h3>{caption}</h3>
 
-            <InputLabel htmlFor='name'>
-                {valueLabels.name}
+            <InputLabel htmlFor='firstName'>
+                {valueLabels.firstName}
             </InputLabel>
             <TextField
-                name='name'
-                id='name'
+                name='firstName'
+                id='firstName'
                 type='text'
                 variant={variantForm}
-                placeholder={placeholders.name}
-                value={form.name}
+                placeholder={placeholders.firstName}
+                value={form.firstName}
+                onChange={update}
+            />
+
+            <InputLabel htmlFor='lastName'>
+                {valueLabels.lastName}
+            </InputLabel>
+            <TextField
+                name='lastName'
+                id='lastName'
+                type='text'
+                variant={variantForm}
+                placeholder={placeholders.lastName}
+                value={form.lastName}
+                onChange={update}
+            />
+
+
+            <InputLabel htmlFor='patronicName'>
+                {valueLabels.patronicName}
+            </InputLabel>
+            <TextField
+                name='patronicName'
+                id='patronicName'
+                type='text'
+                variant={variantForm}
+                placeholder={placeholders.patronicName}
+                value={form.patronicName}
                 onChange={update}
             />
 

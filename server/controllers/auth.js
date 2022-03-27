@@ -1,6 +1,6 @@
 import path from 'path';
-import { MysqlDB } from '../database/mysql.js';
 import bcryptjs from 'bcryptjs';
+import { MysqlDB } from '../database/mysql.js';
 
 
 let salt = bcryptjs.genSaltSync(10);
@@ -42,22 +42,26 @@ export class Auth {
 
         // данные пользователя
         let user = {
-            name : '"' + req.body.name + '"',
-            email : '"' + req.body.email + '"',
+            firstName : '"' + req.body.firstName + '"',
+            lastName : '"' + req.body.lastName + '"',
+            patronicName : '"' + req.body.patronicName + '"',
             phone : '"' + req.body.phone + '"',
+            email : '"' + req.body.email + '"',
+            dateRegis: '"' + req.body.dateRegis + '"',
             password : '"' + hashPass + '"'
         };
 
         console.log(user);
         // сохранение данных пользователя в Mysql
+
         MysqlDB((err, connect) => {
             if(err) return console.error(err);
 
-
-            let sql = `INSERT INTO users(name, email, phone, password) VALUES (${user.name}, ${user.email}, ${user.phone}, ${user.password})`;
+            let sqlValues = `${user.firstName}, ${user.lastName}, ${user.patronicName}, ${user.phone}, ${user.email}, ${user.dateRegis}, ${user.password}`;
+            let sql = `INSERT INTO users(firstName, lastName, patronicName, phone, email, dateRegis, password) VALUES (${sqlValues})`;
             connect.query(sql, (error, result, field) => {
                 
-                // отправка ошибка если не произошла сохранение
+                // отправка ошибки если не произошло сохранение
                 if(error) {
                     return res.writeHead(200, {
                         'Content-Type' : 'application/json'
@@ -67,8 +71,9 @@ export class Auth {
                 // при успешном сохранении
                 res.writeHead(200, {
                     'Content-Type' : 'application/json'
-                }).end(JSON.stringify({result : true}));
+                }).end(JSON.stringify({result : true, inf: result}));
             });
+
         });
     };
 
