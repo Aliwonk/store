@@ -17,15 +17,19 @@ div
     .toolBar
         display: flex
         flex-direction: row
-        width: 150px
+        width: 160px
         height: 100vh
         $btnHeight: 40px
+        $btnFontSize: 1rem
+        $btnFontWeght: 600
         .btns
             width: 100%
             button
                 border: none
                 height: $btnHeight
                 font-family: $font
+                font-size: $btnFontSize
+                font-weight: $btnFontWeght
         .lineBtns
             width: 5px
             height: $btnHeight
@@ -34,46 +38,132 @@ div
     .block
         width: 100%
         height: 100vh
+        $fontSizeTable: 0.9rem
+        $fontWeightTAble: 700
+        =tableRowColumn
+            font-size: $fontSizeTable
+            font-family: $font
+            font-weight: $fontWeightTAble
+        div
+            font-size: $fontSizeTable
+            font-weight: $fontWeightTAble
+        td
+            +tableRowColumn
+        tr
+            +tableRowColumn
+        th
+            +tableRowColumn
         .usersTable
             width: 100%
             height: 100%
         .userProfile
             width: 100%
             height: 100%
-            .userInfo
-                width: 40%
+            .tableUser
+                width: 100%
                 height: 100%
                 .table
                     display: flex
                     flex-direction: column
                     width: auto
                     height: auto
-                    $fontSizeTable: 17px
                     .captionTable
                         display: flex
                         justify-content: center
                         align-items: center
                         width: 100%
                         height: 40px
-                        font-size: 25px
+                        font-size: 1rem
                         font-family: $font
-                        font-weight: 600
-                    .tableUser
-                        width: 100%
+                        font-weight: $fontWeightTAble
+                    .userInfo
+                        width: auto
                         height: 100%
                         .tableCell
                             width: auto
-                    td
-                        font-size: $fontSizeTable
-                        font-family: $font
-                    tr
-                        font-size: $fontSizeTable
-                        font-family: $font
-                    th
-                        font-size: $fontSizeTable
-                        font-family: $font
-                    
+                            margin-left: 50px
+                        
         .goods
+            display: flex
+            flex-direction: column
             position: absolute
             z-index: 3
+            width: 90vw
+            height: 100vh
+            padding-top: 5px
+            .btnAddGood
+                width: 130px
+                height: 30px
+            .addGood
+                width: 70%
+                height: auto
+                margin: 5vw auto
+                .formGood
+                    display: flex
+                    flex-direction: row
+                    justify-content: space-around
+                    align-items: center
+                    width: 100%
+                    height: 100%
+                    .btnImg
+                        display: flex
+                        justify-content: center
+                        align-items: center
+                        width: 30%
+                        height: 60%
+                        border: 1px dotted grey
+                    .goodData
+                        width: 60%
+                        height: auto
+                        div
+                            margin-top: 10px
+                        button
+                            width: 150px
+                            height: 30px
+                            margin-top: 10px
+                            margin-bottom: 10px
+            .goodsInfo
+                display: flex
+                flex-direction: column
+                width: 100%
+                height: 100%
+                .caption
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    width: 100px
+                    height: 60px
+                    margin: 0 auto
+                    font-size: 1.5rem
+                .tableGood
+                    display: flex
+                    flex-direction: row
+                    flex-wrap: wrap
+                    width: 100%
+                    height: auto
+                    .cards
+                        display: flex
+                        flex-direction: column
+                        width: 200px
+                        height: auto
+                        margin-right: 10px
+                        margin-left: 10px
+                        margin-bottom: 10px
+                        .content
+                            display: flex
+                            flex-direction: column
+                            padding: 7px
+                            padding-bottom: 0px
+                            word-break: break-all
+                            .goodDesc
+                                height: 50px
+                                overflow-y: auto
+                        .btns
+                            display: flex
+                            flex-direction: row
+                            padding: 7px
+            .hidden
+                display: none
+        .hidden
+            display: none
                 

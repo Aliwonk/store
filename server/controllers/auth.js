@@ -50,15 +50,13 @@ export class Auth {
             dateRegis: '"' + req.body.dateRegis + '"',
             password : '"' + hashPass + '"'
         };
-
-        console.log(user);
         // сохранение данных пользователя в Mysql
 
         MysqlDB((err, connect) => {
             if(err) return console.error(err);
 
             let sqlValues = `${user.firstName}, ${user.lastName}, ${user.patronicName}, ${user.phone}, ${user.email}, ${user.dateRegis}, ${user.password}`;
-            let sql = `INSERT INTO users(firstName, lastName, patronicName, phone, email, dateRegis, password) VALUES (${sqlValues})`;
+            let sql = `INSERT INTO users(first_name, last_name, patronic_name, phone, email, date_regis, password) VALUES (${sqlValues})`;
             connect.query(sql, (error, result, field) => {
                 
                 // отправка ошибки если не произошло сохранение

@@ -3,6 +3,7 @@ HtmlWebpackPlugin = require('html-webpack-plugin'),
 { CleanWebpackPlugin } = require('clean-webpack-plugin'),
 CssMinimazerPlugins = require('css-minimizer-webpack-plugin'),
 MiniCssExtractPlugin = require('mini-css-extract-plugin');
+require('babel-polyfill');
 
 const useJs = preset => {
     let use = {

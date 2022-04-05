@@ -9,4 +9,12 @@ const controller = new Api();
 apiRouter.route('/users')
 .get(controller.getUsers);
 
+// api с данными торавов
+apiRouter.route('/goods')
+.get(controller.getGoods);
+
+// api картинок товаров
+apiRouter.route('/goodsImg')
+.get(controller.getGoodsImg);
+
 export { apiRouter };
